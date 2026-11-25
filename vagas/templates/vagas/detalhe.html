@@ -30,29 +30,81 @@
 
         </p> 
 
+        {% if vaga.aberta %} 
+
+          <p class="fw-semibold">Inscrições até {{ vaga.prazo|date:"d/m/Y" }}</p> 
+
+        {% else %} 
+
+          <div class="alert alert-secondary"> 
+
+            Esta vaga encerrou as inscrições em {{ vaga.prazo|date:"d/m/Y" }}. 
+
+          </div> 
+
+        {% endif %} 
+
         <h2 class="h5 mt-4">Sobre a vaga</h2> 
 
         <p>{{ vaga.descricao|default:"Descrição em breve." }}</p> 
 
-        <h2 class="h5 mt-4">Skills pedidas</h2> 
+        <h2 class="h5 mt-4">Sua compatibilidade: {{ vaga.compatibilidade }}%</h2> 
+
+        <div class="progress mb-3" role="progressbar" aria-label="Compatibilidade"> 
+
+          <div class="progress-bar bg-develas" 
+
+               style="width: {{ vaga.compatibilidade }}%"></div> 
+
+        </div> 
 
         <p> 
 
           {% for skill in vaga.skills %} 
 
-            <span class="badge rounded-pill text-bg-light border">{{ skill }}</span> 
+            {% if skill in vaga.faltam %} 
+
+              <span class="badge rounded-pill text-bg-light border">{{ skill }}</span> 
+
+            {% else %} 
+
+              <span class="badge rounded-pill badge-develas">✓ {{ skill }}</span> 
+
+            {% endif %} 
 
           {% endfor %} 
 
         </p> 
 
+        {% if vaga.faltam %} 
+
+          <p class="small text-muted">Para estudar: {{ vaga.faltam|join:", " }}.</p> 
+
+        {% else %} 
+
+          <p class="small text-muted">Você já tem todas as skills pedidas!</p> 
+
+        {% endif %} 
+
         <div class="d-flex flex-wrap gap-2 mt-4"> 
 
-          <button class="btn btn-develas" type="button" disabled> 
+          {% if vaga.aberta %} 
 
-            Candidaturas abrem em breve 
+            <button class="btn btn-develas" type="button" disabled> 
 
-          </button> 
+              Candidaturas abrem em breve 
+
+            </button> 
+
+          {% else %} 
+
+            <button class="btn btn-secondary" type="button" disabled> 
+
+              Vaga encerrada 
+
+            </button> 
+
+          {% endif %} 
 
           <a class="btn btn-borda" 
 
@@ -70,4 +122,4 @@
 
   </div> 
 
-{% endblock %} 
+{% endblock %}

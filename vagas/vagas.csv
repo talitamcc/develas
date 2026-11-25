@@ -1,0 +1,17 @@
+id;titulo;empresa;cidade;area;nivel;modalidade;skills;prazo;descricao
+
+1;Desenvolvedora Python Júnior;Nuvem Azul Tecnologia;Rio de Janeiro;Back-end;Júnior;Híbrido;Python, Django, Git;2027-03-31;Você vai entrar no time que cuida do back-end da nossa plataforma de agendamentos, criando funcionalidades novas em Python e Django. Temos mentoria semanal para quem está começando. 
+
+2;Estágio em Análise de Dados;Dados & Cia;Niterói;Dados;Estágio;Remoto;Python, SQL, Excel;2027-02-28;Apoie o time de dados organizando informações e montando relatórios com Python e SQL. Ideal para quem gosta de descobrir histórias escondidas nos números. 
+
+3;Desenvolvedora Front-end Júnior;Pixel Lab;Rio de Janeiro;Front-end;Júnior;Presencial;HTML, CSS, JavaScript;2027-04-30;Construa telas bonitas e acessíveis para os sites dos nossos clientes, trabalhando lado a lado com o time de design. 
+
+4;Estágio em Suporte Técnico;Byte Carioca;Duque de Caxias;Suporte;Estágio;Presencial;Atendimento, Windows, Redes;2026-10-31;Ajude as pessoas que usam nossos sistemas a resolver problemas de computadores e redes, e aprenda na prática o dia a dia de uma equipe de TI. 
+
+5;Designer UX Júnior;Raiz Software;São Gonçalo;UX;Júnior;Remoto;Figma, Pesquisa com usuárias, Prototipação;2027-05-31;Converse com quem usa nossos aplicativos, descubra o que pode melhorar e transforme essas descobertas em protótipos no Figma. 
+
+6;Estágio em Desenvolvimento Python;Tech Delas;Rio de Janeiro;Back-end;Estágio;Híbrido;Python, Lógica de Programação, Git;2027-06-30;Participe do desenvolvimento de aplicações utilizando Python, aprenda a trabalhar com banco de dados e ferramentas de programação. A empresa oferece acompanhamento de profissionais experientes e oportunidades de crescimento para mulheres que desejam ingressar na tecnologia.
+
+7;Analista de Dados Júnior;InovaTech;Niterói;Dados;Júnior;Remoto;Python, SQL, Power BI;2027-07-31;Faça parte de uma equipe de análise de dados, organizando informações, desenvolvendo consultas SQL e criando dashboards no Power BI. Oportunidade para mulheres que desejam desenvolver suas habilidades e construir carreira na área de dados.
+
+8;Estágio em Segurança da Informação;Cyber Delas;Rio de Janeiro;Segurança da Informação;Estágio;Presencial;Redes, Linux, Segurança Digital;2027-08-31;Apoie a equipe de segurança da informação no monitoramento de sistemas, identificação de vulnerabilidades e proteção de dados. Uma excelente oportunidade para mulheres interessadas em iniciar sua carreira em cibersegurança.

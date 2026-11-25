@@ -62,11 +62,31 @@
 
           <div class="col"> 
 
-            <div class="card h-100 border-0 shadow-sm borda-destaque"> 
+            <div class="card h-100 border-0 shadow-sm borda-destaque 
+
+                        {% if not vaga.aberta %}opacity-75{% endif %}"> 
 
               <div class="card-body"> 
 
-                <span class="badge badge-develas mb-2">{{ vaga.modalidade }}</span> 
+                <div class="d-flex justify-content-between gap-2 mb-2"> 
+
+                  <span class="badge badge-develas">{{ vaga.modalidade }}</span> 
+
+                  {% if vaga.aberta %} 
+
+                    <span class="badge text-bg-light border"> 
+
+                      {{ vaga.compatibilidade }}% compatível 
+
+                    </span> 
+
+                  {% else %} 
+
+                    <span class="badge text-bg-secondary">Encerrada</span> 
+
+                  {% endif %} 
+
+                </div> 
 
                 <h2 class="h5 card-title">{{ vaga.titulo }}</h2> 
 
@@ -80,7 +100,21 @@
 
                 </p> 
 
-                <p class="small text-muted mb-0">{{ vaga.skills|join:" · " }}</p> 
+                <p class="small text-muted mb-1">{{ vaga.skills|join:" · " }}</p> 
+
+                {% if vaga.aberta %} 
+
+                  <p class="small mb-0"> 
+
+                    Inscrições até {{ vaga.prazo|date:"d/m/Y" }} 
+
+                  </p> 
+
+                {% else %} 
+
+                  <p class="small mb-0">Inscrições encerradas</p> 
+
+                {% endif %} 
 
               </div> 
 
@@ -110,4 +144,4 @@
 
   </div> 
 
-{% endblock %} 
+{% endblock %}

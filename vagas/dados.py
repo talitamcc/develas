@@ -1,91 +1,119 @@
-VAGAS = [ 
-    { 
-        "id": 1, 
-        "titulo": "Desenvolvedora Python Júnior", 
-        "empresa": "Nuvem Azul Tecnologia", 
-        "cidade": "Rio de Janeiro", 
-        "area": "Back-end", 
-        "nivel": "Júnior", 
-        "modalidade": "Híbrido", 
-        "skills": ["Python", "Django", "Git"], 
-        "descricao": "Você vai entrar no time que cuida do back-end da nossa plataforma de agendamentos, criando funcionalidades novas em Python e Django. Temos mentoria semanal para quem está começando.", 
-    }, 
-    { 
-        "id": 2, 
-        "titulo": "Estágio em Análise de Dados", 
-        "empresa": "Dados & Cia", 
-        "cidade": "Niterói", 
-        "area": "Dados", 
-        "nivel": "Estágio", 
-        "modalidade": "Remoto", 
-        "skills": ["Python", "SQL", "Excel"], 
-        "descricao": "Apoie o time de dados organizando informações e montando relatórios com Python e SQL. Ideal para quem gosta de descobrir histórias escondidas nos números.", 
-    }, 
-    { 
-        "id": 3, 
-        "titulo": "Desenvolvedora Front-end Júnior", 
-        "empresa": "Pixel Lab", 
-        "cidade": "Rio de Janeiro", 
-        "area": "Front-end", 
-        "nivel": "Júnior", 
-        "modalidade": "Presencial", 
-        "skills": ["HTML", "CSS", "JavaScript"], 
-        "descricao": "Construa telas bonitas e acessíveis para os sites dos nossos clientes, trabalhando lado a lado com o time de design.", 
-    }, 
-    { 
-        "id": 4, 
-        "titulo": "Estágio em Suporte Técnico", 
-        "empresa": "Byte Carioca", 
-        "cidade": "Duque de Caxias", 
-        "area": "Suporte", 
-        "nivel": "Estágio", 
-        "modalidade": "Presencial", 
-        "skills": ["Atendimento", "Windows", "Redes"], 
-        "descricao": "Ajude as pessoas que usam nossos sistemas a resolver problemas de computadores e redes, e aprenda na prática o dia a dia de uma equipe de TI.", 
-    }, 
-    { 
-        "id": 5, 
-        "titulo": "Designer UX Júnior", 
-        "empresa": "Raiz Software", 
-        "cidade": "São Gonçalo", 
-        "area": "UX", 
-        "nivel": "Júnior", 
-        "modalidade": "Remoto", 
-        "skills": ["Figma", "Pesquisa com usuárias", "Prototipação"], 
-        "descricao": "Converse com quem usa nossos aplicativos, descubra o que pode melhorar e transforme essas descobertas em protótipos no Figma.", 
-    }, 
-    # ---- Suas vagas: troque os textos entre aspas pelos dados das suas vagas ---- 
-    { 
-        "id": 6, 
-        "titulo": "Título da sua vaga", 
-        "empresa": "Nome da empresa", 
-        "cidade": "Cidade", 
-        "area": "Back-end", 
-        "nivel": "Júnior", 
-        "modalidade": "Remoto",  # Remoto, Híbrido ou Presencial 
-        "skills": ["Skill 1", "Skill 2", "Skill 3"], 
-        "descricao": "A descrição que você escreveu para esta vaga.", 
-    }, 
-    { 
-        "id": 7, 
-        "titulo": "Título da sua vaga", 
-        "empresa": "Nome da empresa", 
-        "cidade": "Cidade", 
-        "area": "Dados", 
-        "nivel": "Estágio", 
-        "modalidade": "Híbrido",  # Remoto, Híbrido ou Presencial 
-        "skills": ["Skill 1", "Skill 2", "Skill 3"], 
-        "descricao": "A descrição que você escreveu para esta vaga.", 
-    }, 
-    { 
-        "id": 8, 
-        "titulo": "Título da sua vaga", 
-        "empresa": "Nome da empresa", 
-        "cidade": "Cidade", 
-        "area": "Front-end", 
-        "nivel": "Júnior", 
-        "modalidade": "Presencial",  # Remoto, Híbrido ou Presencial 
-        "skills": ["Skill 1", "Skill 2", "Skill 3"], 
-        "descricao": "A descrição que você escreveu para esta vaga.", 
-    }, 
-] 
+"""Dados da DevElas: as vagas agora moram no arquivo vagas.csv.""" 
+
+import csv 
+
+from datetime import date 
+
+from pathlib import Path 
+
+ 
+
+CAMINHO_CSV = Path(__file__).resolve().parent / "vagas.csv" 
+
+ 
+
+# Troque pelas suas 5 skills (a missão da aula 6) 
+
+MINHAS_SKILLS = ["Python", "HTML", "Git", "Comunicação", "Excel"] 
+
+ 
+
+ 
+
+def abrir_csv(caminho): 
+
+    """Devolve o texto do arquivo, venha ele do editor (UTF-8) ou do Excel.""" 
+
+    try: 
+
+        return Path(caminho).read_text(encoding="utf-8-sig") 
+
+    except UnicodeDecodeError: 
+
+        return Path(caminho).read_text(encoding="cp1252") 
+
+ 
+
+ 
+
+def montar_vaga(linha): 
+
+    """Transforma uma linha do CSV num dicionário de vaga, com os tipos certos.""" 
+
+    skills = [] 
+
+    for skill in linha["skills"].split(","): 
+
+        if skill.strip(): 
+
+            skills.append(skill.strip()) 
+
+ 
+
+    return { 
+
+        "id": int(linha["id"]), 
+
+        "titulo": linha["titulo"], 
+
+        "empresa": linha["empresa"], 
+
+        "cidade": linha["cidade"], 
+
+        "area": linha["area"], 
+
+        "nivel": linha["nivel"], 
+
+        "modalidade": linha["modalidade"], 
+
+        "skills": skills, 
+
+        "prazo": date.fromisoformat(linha["prazo"]), 
+
+        "descricao": linha["descricao"], 
+
+    } 
+
+ 
+
+ 
+
+def ler_vagas_csv(caminho=CAMINHO_CSV): 
+
+    """Lê o CSV e devolve a lista de vagas, uma por linha. 
+
+ 
+
+    Se o arquivo não existir, avisa no terminal e devolve uma lista vazia. 
+
+    Linhas com id ou prazo em formato errado são puladas, também com aviso. 
+
+    """ 
+
+    try: 
+
+        texto = abrir_csv(caminho) 
+
+    except FileNotFoundError: 
+
+        print(f"Aviso: o arquivo {caminho} não foi encontrado.") 
+
+        return [] 
+
+ 
+
+    vagas = [] 
+
+    linhas = csv.DictReader(texto.splitlines(), delimiter=";") 
+
+    for numero, linha in enumerate(linhas, start=2): 
+
+        try: 
+
+            vagas.append(montar_vaga(linha)) 
+
+        except (KeyError, TypeError, ValueError) as erro: 
+
+            print(f"Aviso: a linha {numero} do vagas.csv foi pulada ({erro}).") 
+
+    return vagas 
